@@ -1,5 +1,5 @@
 import React from 'react';
-import { auth, signInWithGoogle, signInWithGithub } from '../firebase-config';
+import { auth } from '../firebase-config';
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
@@ -13,7 +13,6 @@ function Login() {
 	const [registerPassword, setRegisterPassword] = useState('');
 	const [loginEmail, setLoginEmail] = useState('');
 	const [loginPassword, setLoginPassword] = useState('');
-	const [username, setUsername] = useState('');
 
 	const [user, setUser] = useState({});
 
@@ -54,38 +53,15 @@ function Login() {
 	return (
 		<div className='container'>
 			<div>
-				{/* Google Auth Popup */}
-				<div>
-					<button onClick={signInWithGoogle}>Sign in with Google</button>
-				</div>
-				{/* Google Auth Popup */}
-
-				<h3>---OR---</h3>
-
-				{/* Github Auth Popup */}
-				<div>
-					<button onClick={signInWithGithub}>Sign in with Github</button>
-				</div>
-				{/* Github Auth Popup */}
-
-				<h3>---OR---</h3>
-
-				<h3>Register User:</h3>
-				<input
-					placeholder='Username'
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-				/>
+				<h3>Register User</h3>
 				<input
 					placeholder='Email'
-					value={registerEmail}
 					onChange={(e) => {
 						setRegisterEmail(e.target.value);
 					}}
 				/>
 				<input
 					placeholder='Password'
-					value={registerPassword}
 					onChange={(e) => {
 						setRegisterPassword(e.target.value);
 					}}
@@ -95,17 +71,15 @@ function Login() {
 			</div>
 
 			<div>
-				<h3>Login User:</h3>
+				<h3>Login User</h3>
 				<input
 					placeholder='Email'
-					value={loginEmail}
 					onChange={(e) => {
 						setLoginEmail(e.target.value);
 					}}
 				/>
 				<input
 					placeholder='Password'
-					value={loginPassword}
 					onChange={(e) => {
 						setLoginPassword(e.target.value);
 					}}

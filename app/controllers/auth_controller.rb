@@ -12,7 +12,7 @@ class AuthController < ApplicationController
     email = params[:email]
     password = params[:password]
 
-    uri = URI('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDFyie8OD67Zere7FLdE5KU7ffodL5AigU')
+    uri = URI('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=')
 
     res = Net::HTTP.post_form(uri, {'email' => email, 'password' => password)
 
@@ -52,4 +52,13 @@ class AuthController < ApplicationController
       render json: { status: 401, message: 'You are not logged out' }
     end
   end
+
+  private
+
+  def API_key
+    'AIzaSyDFyie8OD67Zere7FLdE5KU7ffodL5AigU'
+  end
+
+
+
 end
