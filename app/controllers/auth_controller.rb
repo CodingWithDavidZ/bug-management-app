@@ -55,7 +55,7 @@ class AuthController < ApplicationController
 
   private
 
-  def API_key
+  def API_keys
     'AIzaSyA0MahAa4cL6hNCnc70nhP_dc1mv-oixmE'
   end
 
