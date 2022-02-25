@@ -1,12 +1,18 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getAuth } from 'firebase/auth';
+import {
+	getAuth,
+	GoogleAuthProvider,
+	GithubAuthProvider,
+	signInWithPopup,
+} from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
 	apiKey: 'AIzaSyDFyie8OD67Zere7FLdE5KU7ffodL5AigU',
 	authDomain: 'bug-management-app.firebaseapp.com',
@@ -21,3 +27,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const auth = getAuth(app);
+
+//GMAIL AUTH
+const GoogleProvider = new GoogleAuthProvider();
+
+export const signInWithGoogle = () => {
+	signInWithPopup(auth, GoogleProvider)
+		.then((result) => {
+			console.log('GoogleAuthResult', result);
+		})
+		.catch((error) => {
+			console.log('GoogleAuthError', error);
+		});
+};
+//GMAIL AUTH
+
+//Github AUTH
+const GithubProvider = new GithubAuthProvider();
+export const signInWithGithub = () => {
+	signInWithPopup(auth, GithubProvider)
+		.then((result) => {
+			console.log('GithubAuthResult', result);
+		})
+		.catch((error) => {
+			console.log('GithubAuthError', error);
+		});
+};
+//Github AUTH
