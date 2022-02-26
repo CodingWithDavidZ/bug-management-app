@@ -41,6 +41,7 @@ function Login() {
 				loginPassword
 			);
 			console.log('USER', user);
+			console.log('clientVersion', user.user.auth.clientVersion);
 		} catch (error) {
 			console.log('loginUser ERROR @login.js', error.message);
 		}

@@ -1,5 +1,6 @@
 class AuthController < ApplicationController
   require_relative '/assets/.firebase_api_key.rb'
+  require 'net/http'
 
   def index
     if session[:user_id]
@@ -54,5 +55,15 @@ class AuthController < ApplicationController
       render json: { status: 401, message: 'You are not logged out' }
     end
   end
+
+  private
+
+  def get_public_key
+        uri = URI('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com')
+        response = Net::HTTP.get(uri)
+        slice = response.slice(/\"(.*?):/,1)
+        key = slice.chomp("\"")
+        return key
+    end
 
 end

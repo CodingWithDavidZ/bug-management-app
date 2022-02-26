@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uid: MyString
+  provider_id: MyString
+  display_name: MyString
+  email: MyString
+  email_verified: false
+  is_anonymous: false
+  metadata_creationTime: MyString
+  metadata_lastSigninTime: MyString
+  client_version: MyString
+  phone_number: MyString
+  firebase_photo: MyString
+  user_photo: MyString
+  tenant_id: MyString
+
+two:
+  uid: MyString
+  provider_id: MyString
+  display_name: MyString
+  email: MyString
+  email_verified: false
+  is_anonymous: false
+  metadata_creationTime: MyString
+  metadata_lastSigninTime: MyString
+  client_version: MyString
+  phone_number: MyString
+  firebase_photo: MyString
+  user_photo: MyString
+  tenant_id: MyString

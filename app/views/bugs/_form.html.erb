@@ -1,0 +1,97 @@
+<%= form_with(model: bug) do |form| %>
+  <% if bug.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
+
+      <ul>
+        <% bug.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :issue_summary, style: "display: block" %>
+    <%= form.text_field :issue_summary %>
+  </div>
+
+  <div>
+    <%= form.label :issue_description, style: "display: block" %>
+    <%= form.text_field :issue_description %>
+  </div>
+
+  <div>
+    <%= form.label :identified_by, style: "display: block" %>
+    <%= form.text_field :identified_by %>
+  </div>
+
+  <div>
+    <%= form.label :indentified_date, style: "display: block" %>
+    <%= form.date_field :indentified_date %>
+  </div>
+
+  <div>
+    <%= form.label :related_project_id, style: "display: block" %>
+    <%= form.text_field :related_project_id %>
+  </div>
+
+  <div>
+    <%= form.label :assigned_tostatus, style: "display: block" %>
+    <%= form.text_field :assigned_tostatus %>
+  </div>
+
+  <div>
+    <%= form.label :priority, style: "display: block" %>
+    <%= form.text_field :priority %>
+  </div>
+
+  <div>
+    <%= form.label :target_resolution_date, style: "display: block" %>
+    <%= form.text_field :target_resolution_date %>
+  </div>
+
+  <div>
+    <%= form.label :progress, style: "display: block" %>
+    <%= form.text_field :progress %>
+  </div>
+
+  <div>
+    <%= form.label :actual_resolution_date, style: "display: block" %>
+    <%= form.text_field :actual_resolution_date %>
+  </div>
+
+  <div>
+    <%= form.label :resolution_summary, style: "display: block" %>
+    <%= form.text_field :resolution_summary %>
+  </div>
+
+  <div>
+    <%= form.label :created_by, style: "display: block" %>
+    <%= form.text_field :created_by %>
+  </div>
+
+  <div>
+    <%= form.label :modified_by, style: "display: block" %>
+    <%= form.text_field :modified_by %>
+  </div>
+
+  <div>
+    <%= form.label :approved, style: "display: block" %>
+    <%= form.check_box :approved %>
+  </div>
+
+  <div>
+    <%= form.label :image_url, style: "display: block" %>
+    <%= form.text_field :image_url %>
+  </div>
+
+  <div>
+    <%= form.label :comment_id, style: "display: block" %>
+    <%= form.text_field :comment_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
