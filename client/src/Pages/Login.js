@@ -90,8 +90,8 @@ function Login() {
 			</div>
 
 			<div>
-				<h3>Current User:</h3>
-				{user?.email}
+				<h3>Current User: </h3>
+				{user?.email} &nbsp;
 				<button onClick={logout}>Logout</button>
 			</div>
 		</div>
