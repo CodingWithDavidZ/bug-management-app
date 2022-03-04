@@ -1,6 +1,7 @@
 class AuthController < ApplicationController
   require_relative '/assets/.firebase_api_key.rb'
   require 'net/http'
+  require 'JWT'
 
   def index
     if session[:user_id]
@@ -62,8 +63,11 @@ class AuthController < ApplicationController
         uri = URI('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com')
         response = Net::HTTP.get(uri)
         slice = response.slice(/\"(.*?):/,1)
-        key = slice.chomp("\"")
+        keyString = slice.chomp("\"")
+        key = OpenSSL::PKey.read(keyString)
         return key
     end
+
+    # decoded_token = JWT.decode token, key, true, { algorithm: 'RS256' }
 
 end
