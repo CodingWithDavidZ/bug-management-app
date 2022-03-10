@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
-import { getAuth } from 'firebase/auth';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,19 +17,19 @@ import { getAuth } from 'firebase/auth';
 // 	measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 // };
 const firebaseConfig = {
-	apiKey: 'AIzaSyCKPBKet09U308sCdEksUk02cDP8xxSzaY',
+  apiKey: "AIzaSyCKPBKet09U308sCdEksUk02cDP8xxSzaY",
 
-	authDomain: 'bug-management-system.firebaseapp.com',
+  authDomain: "bug-management-system.firebaseapp.com",
 
-	projectId: 'bug-management-system',
+  projectId: "bug-management-system",
 
-	storageBucket: 'bug-management-system.appspot.com',
+  storageBucket: "bug-management-system.appspot.com",
 
-	messagingSenderId: '172346392983',
+  messagingSenderId: "172346392983",
 
-	appId: '1:172346392983:web:768195d15390f05f9ec4d2',
+  appId: "1:172346392983:web:768195d15390f05f9ec4d2",
 
-	measurementId: 'G-CD7M3C9R8G',
+  measurementId: "G-CD7M3C9R8G",
 };
 
 // Initialize Firebase

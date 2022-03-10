@@ -1,5 +1,5 @@
 class BugsController < ApplicationController
-  before_action :set_bug, only: %i[ show edit update destroy ]
+  before_action :set_bug, only: %i[show edit update destroy]
 
   # GET /bugs or /bugs.json
   def index
@@ -7,8 +7,7 @@ class BugsController < ApplicationController
   end
 
   # GET /bugs/1 or /bugs/1.json
-  def show
-  end
+  def show; end
 
   # GET /bugs/new
   def new
@@ -16,8 +15,7 @@ class BugsController < ApplicationController
   end
 
   # GET /bugs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /bugs or /bugs.json
   def create
@@ -25,7 +23,9 @@ class BugsController < ApplicationController
 
     respond_to do |format|
       if @bug.save
-        format.html { redirect_to bug_url(@bug), notice: "Bug was successfully created." }
+        format.html do
+          redirect_to bug_url(@bug), notice: 'Bug was successfully created.'
+        end
         format.json { render :show, status: :created, location: @bug }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,9 @@ class BugsController < ApplicationController
   def update
     respond_to do |format|
       if @bug.update(bug_params)
-        format.html { redirect_to bug_url(@bug), notice: "Bug was successfully updated." }
+        format.html do
+          redirect_to bug_url(@bug), notice: 'Bug was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @bug }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +54,41 @@ class BugsController < ApplicationController
     @bug.destroy
 
     respond_to do |format|
-      format.html { redirect_to bugs_url, notice: "Bug was successfully destroyed." }
+      format.html do
+        redirect_to bugs_url, notice: 'Bug was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bug
-      @bug = Bug.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def bug_params
-      params.require(:bug).permit(:issue_summary, :issue_description, :identified_by, :indentified_date, :related_project_id, :assigned_tostatus, :priority, :target_resolution_date, :progress, :actual_resolution_date, :resolution_summary, :created_by, :modified_by, :approved, :image_url, :comment_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bug
+    @bug = Bug.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def bug_params
+    params
+      .require(:bug)
+      .permit(
+        :issue_summary,
+        :issue_description,
+        :identified_by,
+        :indentified_date,
+        :related_project_id,
+        :assigned_tostatus,
+        :priority,
+        :target_resolution_date,
+        :progress,
+        :actual_resolution_date,
+        :resolution_summary,
+        :created_by,
+        :modified_by,
+        :approved,
+        :image_url,
+        :comment_id
+      )
+  end
 end

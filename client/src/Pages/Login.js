@@ -5,6 +5,7 @@ import {
 	signInWithEmailAndPassword,
 	onAuthStateChanged,
 	signOut,
+	getAuth,
 } from 'firebase/auth';
 import { useState } from 'react';
 
@@ -20,6 +21,45 @@ function Login() {
 		setUser(currentUser);
 	});
 
+	function sendAccessTokenToBackend(accessToken) {
+		fetch('/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				firebase_access_token: accessToken,
+				//TODO implement following fields
+				// username: username,
+				// first_name: firstName,
+				// last_name: lastName,
+				// role: role,
+				// team_id: teamId,
+				// is_team_lead: isTeamLead,
+				// avatar: avatarUrl,
+				firebase_phone_number: user.phoneNumber,
+				firebase_email: user.email,
+				firebase_email_verified: user.emailVerified,
+				firebase_provider_id: user.providerId,
+				firebase_display_name: user.displayName,
+				firebase_is_anonymous: user.isAnonymous,
+				firebase_metadata_creationTime: user.metadata.creationTime,
+				firebase_metadata_lastSignInTime: user.metadata.lastSignInTime,
+				firebase_client_version: user.clientVersion,
+				firebase_photo: user.photoURL,
+				firebase_tenant_id: user.tenantId,
+				firebase_uid: user.uid,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
+
 	const register = async () => {
 		try {
 			const user = await createUserWithEmailAndPassword(
@@ -33,18 +73,26 @@ function Login() {
 		}
 	};
 
-	const login = async () => {
-		try {
-			const user = await signInWithEmailAndPassword(
-				auth,
-				loginEmail,
-				loginPassword
-			);
-			console.log('USER', user);
-			console.log('clientVersion', user.user.auth.clientVersion);
-		} catch (error) {
-			console.log('loginUser ERROR @login.js', error.message);
-		}
+	const login = () => {
+		getAuth();
+		signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+			.then((userCredential) => {
+				// Signed in
+				let user = userCredential.user;
+				setUser(user);
+				sendAccessTokenToBackend(user.accessToken);
+				// ...
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(
+					'loginErrorCode:',
+					errorCode,
+					'loginErrorMessage:',
+					errorMessage
+				);
+			});
 	};
 
 	const logout = async () => {

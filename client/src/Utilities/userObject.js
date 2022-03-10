@@ -1,21 +1,21 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const [userObj, setUserObj] = useState({
-	uid: '',
-	providerId: '',
-	accessToken: '',
-	displayName: '',
-	email: '',
-	emailVerified: false,
-	isAnonymous: false,
-	metadata: {
-		creationTime: '',
-		lastSignInTime: '',
-	},
-	clientVersion: '',
-	phoneNumber: '',
-	photoURL: '',
-	tenantId: '',
+  uid: "",
+  providerId: "",
+  accessToken: "",
+  displayName: "",
+  email: "",
+  emailVerified: false,
+  isAnonymous: false,
+  metadata: {
+    creationTime: "",
+    lastSignInTime: "",
+  },
+  clientVersion: "",
+  phoneNumber: "",
+  photoURL: "",
+  tenantId: "",
 });
 
 // uid:${user.user.uid}
