@@ -21,14 +21,14 @@ function Login() {
 		setUser(currentUser);
 	});
 
-	function sendAccessTokenToBackend(accessToken) {
-		fetch('/login', {
+	function sendUserToBackend(user) {
+		fetch('http://localhost:3000/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				firebase_access_token: accessToken,
+				firebase_access_token: user.accessToken,
 				//TODO implement following fields
 				// username: username,
 				// first_name: firstName,
@@ -60,17 +60,40 @@ function Login() {
 			});
 	}
 
-	const register = async () => {
-		try {
-			const user = await createUserWithEmailAndPassword(
-				auth,
-				registerEmail,
-				registerPassword
-			);
-			console.log('USER', user);
-		} catch (error) {
-			console.log('registerUser ERROR @login.js', error.message);
-		}
+	// const register = async () => {
+	// 	try {
+	// 		const user = await createUserWithEmailAndPassword(
+	// 			auth,
+	// 			registerEmail,
+	// 			registerPassword
+	// 		);
+	//     setUser(user)
+	// 		console.log('USER', user);
+	// 	} catch (error) {
+	// 		console.log('registerUser ERROR @login.js', error.message);
+	// 	}
+	// };
+
+	const register = () => {
+		getAuth();
+		createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
+			.then((userCredential) => {
+				// Signed in
+				const user = userCredential.user;
+				setUser(user);
+				// ...
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(
+					'loginErrorCode:',
+					errorCode,
+					'loginErrorMessage:',
+					errorMessage
+				);
+				// ..
+			});
 	};
 
 	const login = () => {
@@ -80,7 +103,7 @@ function Login() {
 				// Signed in
 				let user = userCredential.user;
 				setUser(user);
-				sendAccessTokenToBackend(user.accessToken);
+				sendUserToBackend(user);
 				// ...
 			})
 			.catch((error) => {
@@ -95,8 +118,20 @@ function Login() {
 			});
 	};
 
+	async function logoutOfServer() {
+		await fetch('/logout', { method: 'DELETE' }).then((r) => {
+			if (r.status === 200) {
+				console.log('logout of server successful');
+			} else {
+				console.log('logout of server failed');
+			}
+		});
+	}
+
 	const logout = async () => {
 		await signOut(auth);
+		logoutOfServer();
+		setUser({});
 	};
 
 	return (

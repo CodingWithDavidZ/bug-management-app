@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 	# POST /users or /users.json
 	def create
 		user = User.create!(user_params)
-		session[:user_id] = user.id
+		session[:firebase_uid] = user.firebase_uid
 		render json: user, status: :created
 	end
 

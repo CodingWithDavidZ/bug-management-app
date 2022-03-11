@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 	resources :bugs
 	resources :users
 
-	post '/login', to: 'users#login'
+	post '/login', to: 'sessions#create'
+	delete '/logout', to: 'sessions#destroy'
+
+	get '/test', to: 'sessions#test'
 
 	# Routing logic: fallback requests for React Router.
 	# Leave this here to help deploy your app later!
