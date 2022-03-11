@@ -14,6 +14,7 @@ function Login() {
 	const [registerPassword, setRegisterPassword] = useState('');
 	const [loginEmail, setLoginEmail] = useState('');
 	const [loginPassword, setLoginPassword] = useState('');
+	const [type, setType] = useState();
 
 	const [user, setUser] = useState({});
 
@@ -21,8 +22,9 @@ function Login() {
 		setUser(currentUser);
 	});
 
-	function sendUserToBackend(user) {
-		fetch('http://localhost:3000/login', {
+	function sendUserToBackend(user, type) {
+		console.log('type', type);
+		fetch(`http://localhost:3000/${type}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -60,27 +62,15 @@ function Login() {
 			});
 	}
 
-	// const register = async () => {
-	// 	try {
-	// 		const user = await createUserWithEmailAndPassword(
-	// 			auth,
-	// 			registerEmail,
-	// 			registerPassword
-	// 		);
-	//     setUser(user)
-	// 		console.log('USER', user);
-	// 	} catch (error) {
-	// 		console.log('registerUser ERROR @login.js', error.message);
-	// 	}
-	// };
-
 	const register = () => {
 		getAuth();
 		createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
 			.then((userCredential) => {
 				// Signed in
-				const user = userCredential.user;
+				let user = userCredential.user;
+				// TODO: fix race condition for setType here and on login
 				setUser(user);
+				sendUserToBackend(user, 'register');
 				// ...
 			})
 			.catch((error) => {
@@ -103,7 +93,7 @@ function Login() {
 				// Signed in
 				let user = userCredential.user;
 				setUser(user);
-				sendUserToBackend(user);
+				sendUserToBackend(user, 'login');
 				// ...
 			})
 			.catch((error) => {

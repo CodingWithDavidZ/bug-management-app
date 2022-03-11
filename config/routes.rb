@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 	resources :bugs
 	resources :users
 
+	post '/register', to: 'users#create'
+
 	post '/login', to: 'sessions#create'
 	delete '/logout', to: 'sessions#destroy'
 
