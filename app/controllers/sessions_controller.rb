@@ -30,6 +30,7 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
+		byebug
 		session.delete(:firebase_uid)
 		head :no_content
 	end
