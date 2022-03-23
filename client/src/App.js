@@ -1,15 +1,19 @@
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import AuthContainer from './Auth/AuthContainer';
 import Header from './Pages/Header';
+import { UserContext } from './Context/UserContext';
+import Home from './Pages/Home';
 
 function App() {
 	const [user, setUser] = useState({});
 
 	return (
 		<div>
-			<Header setUser={setUser} user={user} />
-			<AuthContainer user={user} setUser={setUser} />
+			<UserContext.Provider value={[user, setUser]}>
+				<Header />
+				{user.uid ? <Home /> : <AuthContainer />}
+			</UserContext.Provider>
 		</div>
 	);
 }

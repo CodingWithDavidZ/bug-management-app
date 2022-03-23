@@ -1,11 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { auth } from '../firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
 import Login from './Login';
 import Register from './Register';
+import { UserContext } from '../Context/UserContext';
 
-function AuthContainer({ user, setUser }) {
+function AuthContainer() {
+	const [user, setUser] = useContext(UserContext);
 	const [registerEmail, setRegisterEmail] = useState('');
 	const [registerPassword, setRegisterPassword] = useState('');
 	const [loginEmail, setLoginEmail] = useState('');
@@ -15,6 +16,7 @@ function AuthContainer({ user, setUser }) {
 		first_name: '',
 		last_name: '',
 		avatar: '',
+		is_team_lead: false,
 	});
 
 	const [authType, setAuthType] = useState('');
@@ -27,9 +29,11 @@ function AuthContainer({ user, setUser }) {
 	}
 
 	// onAuthStateChanged(auth, (currentUser) => {
-	// 	//TODO: this is updating user without the additionalUserInfo
+	// 	//TODO: Check to see if this is really needed or not
 	// 	setUser(currentUser);
 	// });
+
+	// TODO: Handle login errors on browser
 
 	function sendUserToBackend(user, type) {
 		fetch(`http://localhost:3000/${type}`, {
@@ -45,7 +49,7 @@ function AuthContainer({ user, setUser }) {
 				last_name: additionalUserInfo.last_name,
 				// role: role,
 				// team_id: teamId,
-				// is_team_lead: isTeamLead,
+				is_team_lead: false,
 				avatar: additionalUserInfo.avatar,
 				firebase_phone_number: user.phoneNumber,
 				firebase_email: user.email,

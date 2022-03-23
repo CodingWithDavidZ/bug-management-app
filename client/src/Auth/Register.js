@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { auth } from '../firebase-config';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { UserContext } from '../Context/UserContext';
 
 function Register({
 	registerEmail,
 	setRegisterEmail,
 	registerPassword,
 	setRegisterPassword,
-	setUser,
-	user,
 	sendUserToBackend,
 	additionalUserInfo,
 	setAdditionalUserInfo,
 }) {
+	const [user, setUser] = useContext(UserContext);
+
 	function register() {
 		getAuth();
 		createUserWithEmailAndPassword(

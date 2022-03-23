@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { auth } from '../firebase-config';
 import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { UserContext } from '../Context/UserContext';
 
 function Login({
-	setUser,
 	sendUserToBackend,
 	loginEmail,
 	loginPassword,
 	setLoginEmail,
 	setLoginPassword,
 }) {
+	const [user, setUser] = useContext(UserContext);
+
 	const login = () => {
 		getAuth();
 		signInWithEmailAndPassword(auth, loginEmail, loginPassword)
@@ -33,7 +35,7 @@ function Login({
 	};
 
 	return (
-		<div className='w-full max-w-xs'>
+		<div className='w-full max-w-xs' onSubmit={login}>
 			<h3>Login User:</h3>
 			<div
 				className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
