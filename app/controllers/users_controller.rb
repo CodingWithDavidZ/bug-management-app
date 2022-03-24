@@ -35,6 +35,7 @@ class UsersController < ApplicationController
 				:team_id,
 				:is_team_lead,
 				:avatar,
+				:password_digest,
 				:firebase_access_token,
 				:firebase_phone_number,
 				:firebase_email,

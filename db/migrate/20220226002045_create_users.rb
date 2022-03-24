@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
 			t.integer :team_id
 			t.boolean :is_team_lead, default: false
 			t.string :avatar
+			t.string :password_digest
 			t.string :firebase_access_token
 			t.string :firebase_phone_number
 			t.string :firebase_email

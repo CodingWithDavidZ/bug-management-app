@@ -7,42 +7,9 @@ import { AiOutlineComment } from 'react-icons/ai';
 import { MdOutlineUpdate } from 'react-icons/md';
 
 function TableElement() {
-	function dropdownFunction(e) {
-		console.log('Dropdown:', e.target.value);
-	}
-
-	// function dropdownFunction(element) {
-	// 	var dropdowns = document.getElementsByClassName('dropdown-content');
-	// 	var i;
-	// 	let list =
-	// 		element.parentElement.parentElement.getElementsByClassName(
-	// 			'dropdown-content'
-	// 		)[0];
-	// 	list.classList.add('target');
-	// 	for (i = 0; i < dropdowns.length; i++) {
-	// 		if (!dropdowns[i].classList.contains('target')) {
-	// 			dropdowns[i].classList.add('hidden');
-	// 		}
-	// 	}
-	// 	list.classList.toggle('hidden');
-	// }
-
-	// <div className='dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden'>
-	// 		<div
-	// 			tabIndex='0'
-	// 			className='focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white'
-	// 		>
-	// 			<p>Edit</p>
-	// 		</div>
-	// 		<div
-	// 			tabIndex='0'
-	// 			className='focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white'
-	// 		>
-	// 			<p>Delete</p>
-	// 		</div>
-	// 	</div>;
-
-	return (
+	const tableData = (
+		// user.tickets.map((ticket) => {
+		// 	return (
 		<tr
 			tabIndex='0'
 			className='focus:outline-none h-16 border border-gray-100 rounded'
@@ -55,23 +22,7 @@ function TableElement() {
 							type='checkbox'
 							className='focus:opacity-100 checkbox opacity-0 absolute cursor-pointer w-full h-full'
 						/>
-						<div className='check-icon hidden bg-indigo-700 text-white rounded-sm'>
-							<svg
-								className='icon icon-tabler icon-tabler-check'
-								xmlns='http://www.w3.org/2000/svg'
-								width='20'
-								height='20'
-								viewBox='0 0 24 24'
-								strokeWidth='1.5'
-								stroke='currentColor'
-								fill='none'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-							>
-								<path stroke='none' d='M0 0h24v24H0z'></path>
-								<path d='M5 12l5 5l10 -10'></path>
-							</svg>
-						</div>
+						<div className='check-icon hidden bg-indigo-700 text-white rounded-sm'></div>
 					</div>
 				</div>
 			</td>
@@ -129,6 +80,10 @@ function TableElement() {
 			</td>
 		</tr>
 	);
+	// 	);
+	// };
+
+	return <>{tableData}</>;
 }
 
 export default TableElement;
