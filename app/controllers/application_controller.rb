@@ -20,6 +20,13 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def render_unprocessable_entity(exceptions)
+		render json: {
+				errors: exceptions.record.errors.full_messages,
+		       },
+		       status: :unprocessable_entity
+	end
+
 	def auth_params
 		params.permit(:firebase_access_token)
 	end

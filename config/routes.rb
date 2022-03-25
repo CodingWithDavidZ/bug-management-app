@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :users
+  resources :teams
+  resources :projects
+  resources :comments
+  resources :bugs
 	resources :teams
 	resources :comments
 	resources :projects

@@ -7,6 +7,7 @@ class CreateProjects < ActiveRecord::Migration[7.0]
       t.date :actual_end_date
       t.integer :created_by
       t.integer :modified_by
+      t.integer :bug_id
 
       t.timestamps
     end

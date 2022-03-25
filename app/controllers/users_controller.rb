@@ -1,53 +1,70 @@
 class UsersController < ApplicationController
-	before_action :authorize, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[ show edit update destroy ]
 
-	# GET /users or /users.json
-	def index
-		@users = User.all
-	end
+  # GET /users or /users.json
+  def index
+    @users = User.all
+  end
 
-	# POST /users or /users.json
-	def create
-		user = User.create!(user_params)
-		session[:firebase_uid] = user.firebase_uid
-		render json: user, status: :created
-	end
+  # GET /users/1 or /users/1.json
+  def show
+  end
 
-	# DELETE /users/1 or /users/1.json
-	def destroy
-		@user.destroy
-		render json: { status: 200, message: 'User was successfully destroyed.' }
-	end
+  # GET /users/new
+  def new
+    @user = User.new
+  end
 
-	private
+  # GET /users/1/edit
+  def edit
+  end
 
-	# Only allow a list of trusted parameters through.
-	def user_params
-		params
-			.require(:user)
-			.permit(
-				:id,
-				:firebase_uid,
-				:username,
-				:first_name,
-				:last_name,
-				:role,
-				:team_id,
-				:is_team_lead,
-				:avatar,
-				:password_digest,
-				:firebase_access_token,
-				:firebase_phone_number,
-				:firebase_email,
-				:firebase_email_verified,
-				:firebase_provider_id,
-				:firebase_display_name,
-				:firebase_is_anonymous,
-				:firebase_metadata_creationTime,
-				:firebase_metadata_lastSignInTime,
-				:firebase_client_version,
-				:firebase_photo,
-				:firebase_tenant_id,
-			)
-	end
+  # POST /users or /users.json
+  def create
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /users/1 or /users/1.json
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /users/1 or /users/1.json
+  def destroy
+    @user.destroy
+
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def user_params
+      params.require(:user).permit(:firebase_uid, :username, :first_name, :last_name, :role, :team_id, :is_team_lead, :avatar, :password_digest, :firebase_access_token, :firebase_phone_number, :firebase_email, :firebase_email, :firebase_email_verified, :firebase_provider_id, :firebase_display_name, :firebase_is_anonymous, :firebase_metadata_creationTime, :firebase_metadata_lastSignInTime, :firebase_client_version, :firebase_photo, :firebase_tenant_id)
+    end
 end

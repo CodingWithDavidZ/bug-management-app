@@ -12,73 +12,83 @@
   <% end %>
 
   <div>
-    <%= form.label :issue_summary, style: "display: block" %>
-    <%= form.text_field :issue_summary %>
+    <%= form.label :issue_title, style: "display: block" %>
+    <%= form.text_field :issue_title %>
   </div>
 
   <div>
     <%= form.label :issue_description, style: "display: block" %>
-    <%= form.text_field :issue_description %>
+    <%= form.text_area :issue_description %>
   </div>
 
   <div>
     <%= form.label :identified_by, style: "display: block" %>
-    <%= form.text_field :identified_by %>
+    <%= form.number_field :identified_by %>
   </div>
 
   <div>
-    <%= form.label :indentified_date, style: "display: block" %>
-    <%= form.date_field :indentified_date %>
+    <%= form.label :identified_date, style: "display: block" %>
+    <%= form.date_field :identified_date %>
   </div>
 
   <div>
-    <%= form.label :related_project_id, style: "display: block" %>
-    <%= form.text_field :related_project_id %>
+    <%= form.label :project_id, style: "display: block" %>
+    <%= form.number_field :project_id %>
   </div>
 
   <div>
-    <%= form.label :assigned_tostatus, style: "display: block" %>
-    <%= form.text_field :assigned_tostatus %>
+    <%= form.label :assigned_to, style: "display: block" %>
+    <%= form.number_field :assigned_to %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :status_modified_date, style: "display: block" %>
+    <%= form.date_field :status_modified_date %>
   </div>
 
   <div>
     <%= form.label :priority, style: "display: block" %>
-    <%= form.text_field :priority %>
+    <%= form.number_field :priority %>
   </div>
 
   <div>
     <%= form.label :target_resolution_date, style: "display: block" %>
-    <%= form.text_field :target_resolution_date %>
+    <%= form.date_field :target_resolution_date %>
   </div>
 
   <div>
     <%= form.label :progress, style: "display: block" %>
-    <%= form.text_field :progress %>
+    <%= form.number_field :progress %>
   </div>
 
   <div>
     <%= form.label :actual_resolution_date, style: "display: block" %>
-    <%= form.text_field :actual_resolution_date %>
+    <%= form.date_field :actual_resolution_date %>
   </div>
 
   <div>
     <%= form.label :resolution_summary, style: "display: block" %>
-    <%= form.text_field :resolution_summary %>
-  </div>
-
-  <div>
-    <%= form.label :created_by, style: "display: block" %>
-    <%= form.text_field :created_by %>
+    <%= form.text_area :resolution_summary %>
   </div>
 
   <div>
     <%= form.label :modified_by, style: "display: block" %>
-    <%= form.text_field :modified_by %>
+    <%= form.number_field :modified_by %>
   </div>
 
   <div>
     <%= form.label :approved, style: "display: block" %>
     <%= form.check_box :approved %>
+  </div>
+
+  <div>
+    <%= form.label :approved_by, style: "display: block" %>
+    <%= form.number_field :approved_by %>
   </div>
 
   <div>
@@ -88,7 +98,12 @@
 
   <div>
     <%= form.label :comment_id, style: "display: block" %>
-    <%= form.text_field :comment_id %>
+    <%= form.number_field :comment_id %>
+  </div>
+
+  <div>
+    <%= form.label :created_by, style: "display: block" %>
+    <%= form.number_field :created_by %>
   </div>
 
   <div>

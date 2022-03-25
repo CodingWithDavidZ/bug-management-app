@@ -28,6 +28,7 @@ puts 'Creating and Seeding Projects'
 			target_end_date:
 				Faker::Date.between(from: Date.today, to: Date.today + 1.year),
 			created_by: Faker::Number.between(1, 10),
+			bug_id: Faker::Number.between(1, 50),
 		)
 end
 puts 'Seeding of Projects Completed'
@@ -68,7 +69,7 @@ puts 'Creating and Seeding Users'
 			team_id: Team.all.sample,
 			is_team_lead: false,
 			avatar: Faker::Avatar.image,
-			password: 123_456,
+			password: '123456',
 			firebase_access_token: Faker::Number.number(digits: 15),
 			firebase_phone_number: Faker::Number.number(digits: 10),
 			firebase_email: Faker::Internet.safe_email,

@@ -18,27 +18,32 @@
 
   <div>
     <%= form.label :start_date, style: "display: block" %>
-    <%= form.text_field :start_date %>
+    <%= form.date_field :start_date %>
   </div>
 
   <div>
     <%= form.label :target_end_date, style: "display: block" %>
-    <%= form.text_field :target_end_date %>
+    <%= form.date_field :target_end_date %>
   </div>
 
   <div>
     <%= form.label :actual_end_date, style: "display: block" %>
-    <%= form.text_field :actual_end_date %>
+    <%= form.date_field :actual_end_date %>
   </div>
 
   <div>
     <%= form.label :created_by, style: "display: block" %>
-    <%= form.text_field :created_by %>
+    <%= form.number_field :created_by %>
   </div>
 
   <div>
     <%= form.label :modified_by, style: "display: block" %>
-    <%= form.text_field :modified_by %>
+    <%= form.number_field :modified_by %>
+  </div>
+
+  <div>
+    <%= form.label :bug_id, style: "display: block" %>
+    <%= form.number_field :bug_id %>
   </div>
 
   <div>

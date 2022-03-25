@@ -1,31 +1,49 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  uid: MyString
-  provider_id: MyString
-  display_name: MyString
-  email: MyString
-  email_verified: false
-  is_anonymous: false
-  metadata_creationTime: MyString
-  metadata_lastSigninTime: MyString
-  client_version: MyString
-  phone_number: MyString
+  firebase_uid: MyString
+  username: MyString
+  first_name: MyString
+  last_name: MyString
+  role: 1
+  team_id: 1
+  is_team_lead: 1
+  avatar: MyString
+  password_digest: MyString
+  firebase_access_token: MyString
+  firebase_phone_number: MyString
+  firebase_email: MyString
+  firebase_email: MyString
+  firebase_email_verified: false
+  firebase_provider_id: MyString
+  firebase_display_name: MyString
+  firebase_is_anonymous: false
+  firebase_metadata_creationTime: MyString
+  firebase_metadata_lastSignInTime: MyString
+  firebase_client_version: MyString
   firebase_photo: MyString
-  user_photo: MyString
-  tenant_id: MyString
+  firebase_tenant_id: MyString
 
 two:
-  uid: MyString
-  provider_id: MyString
-  display_name: MyString
-  email: MyString
-  email_verified: false
-  is_anonymous: false
-  metadata_creationTime: MyString
-  metadata_lastSigninTime: MyString
-  client_version: MyString
-  phone_number: MyString
+  firebase_uid: MyString
+  username: MyString
+  first_name: MyString
+  last_name: MyString
+  role: 1
+  team_id: 1
+  is_team_lead: 1
+  avatar: MyString
+  password_digest: MyString
+  firebase_access_token: MyString
+  firebase_phone_number: MyString
+  firebase_email: MyString
+  firebase_email: MyString
+  firebase_email_verified: false
+  firebase_provider_id: MyString
+  firebase_display_name: MyString
+  firebase_is_anonymous: false
+  firebase_metadata_creationTime: MyString
+  firebase_metadata_lastSignInTime: MyString
+  firebase_client_version: MyString
   firebase_photo: MyString
-  user_photo: MyString
-  tenant_id: MyString
+  firebase_tenant_id: MyString

@@ -12,53 +12,103 @@
   <% end %>
 
   <div>
-    <%= form.label :uid, style: "display: block" %>
-    <%= form.text_field :uid %>
+    <%= form.label :firebase_uid, style: "display: block" %>
+    <%= form.text_field :firebase_uid %>
   </div>
 
   <div>
-    <%= form.label :provider_id, style: "display: block" %>
-    <%= form.text_field :provider_id %>
+    <%= form.label :username, style: "display: block" %>
+    <%= form.text_field :username %>
   </div>
 
   <div>
-    <%= form.label :display_name, style: "display: block" %>
-    <%= form.text_field :display_name %>
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name %>
   </div>
 
   <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name %>
   </div>
 
   <div>
-    <%= form.label :email_verified, style: "display: block" %>
-    <%= form.check_box :email_verified %>
+    <%= form.label :role, style: "display: block" %>
+    <%= form.number_field :role %>
   </div>
 
   <div>
-    <%= form.label :is_anonymous, style: "display: block" %>
-    <%= form.check_box :is_anonymous %>
+    <%= form.label :team_id, style: "display: block" %>
+    <%= form.number_field :team_id %>
   </div>
 
   <div>
-    <%= form.label :metadata_creationTime, style: "display: block" %>
-    <%= form.text_field :metadata_creationTime %>
+    <%= form.label :is_team_lead, style: "display: block" %>
+    <%= form.number_field :is_team_lead %>
   </div>
 
   <div>
-    <%= form.label :metadata_lastSigninTime, style: "display: block" %>
-    <%= form.text_field :metadata_lastSigninTime %>
+    <%= form.label :avatar, style: "display: block" %>
+    <%= form.text_field :avatar %>
   </div>
 
   <div>
-    <%= form.label :client_version, style: "display: block" %>
-    <%= form.text_field :client_version %>
+    <%= form.label :password_digest, style: "display: block" %>
+    <%= form.text_field :password_digest %>
   </div>
 
   <div>
-    <%= form.label :phone_number, style: "display: block" %>
-    <%= form.text_field :phone_number %>
+    <%= form.label :firebase_access_token, style: "display: block" %>
+    <%= form.text_field :firebase_access_token %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_phone_number, style: "display: block" %>
+    <%= form.text_field :firebase_phone_number %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_email, style: "display: block" %>
+    <%= form.text_field :firebase_email %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_email, style: "display: block" %>
+    <%= form.text_field :firebase_email %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_email_verified, style: "display: block" %>
+    <%= form.check_box :firebase_email_verified %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_provider_id, style: "display: block" %>
+    <%= form.text_field :firebase_provider_id %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_display_name, style: "display: block" %>
+    <%= form.text_field :firebase_display_name %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_is_anonymous, style: "display: block" %>
+    <%= form.check_box :firebase_is_anonymous %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_metadata_creationTime, style: "display: block" %>
+    <%= form.text_field :firebase_metadata_creationTime %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_metadata_lastSignInTime, style: "display: block" %>
+    <%= form.text_field :firebase_metadata_lastSignInTime %>
+  </div>
+
+  <div>
+    <%= form.label :firebase_client_version, style: "display: block" %>
+    <%= form.text_field :firebase_client_version %>
   </div>
 
   <div>
@@ -67,13 +117,8 @@
   </div>
 
   <div>
-    <%= form.label :user_photo, style: "display: block" %>
-    <%= form.text_field :user_photo %>
-  </div>
-
-  <div>
-    <%= form.label :tenant_id, style: "display: block" %>
-    <%= form.text_field :tenant_id %>
+    <%= form.label :firebase_tenant_id, style: "display: block" %>
+    <%= form.text_field :firebase_tenant_id %>
   </div>
 
   <div>

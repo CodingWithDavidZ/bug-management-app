@@ -1,11 +1,7 @@
 class User < ApplicationRecord
-	has_many :comments, foreign_key: 'created_by'
-	has_one :team
-
-	has_many :projects, through: :team
-
-	belongs_to :team, optional: true
-
+	has_many :bugs
+	belongs_to :team
+	has_many :comments, foreign_key: :created_by
 	# def assign_team_leader
 	#     if User.is_team_lead == true
 	#         #TODO verify no lead_id exists

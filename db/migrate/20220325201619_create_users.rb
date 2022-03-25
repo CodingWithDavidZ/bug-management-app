@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
 			t.string :last_name
 			t.integer :role
 			t.integer :team_id
-			t.boolean :is_team_lead, default: false
+			t.integer :is_team_lead, default: false
 			t.string :avatar
 			t.string :password_digest
 			t.string :firebase_access_token
