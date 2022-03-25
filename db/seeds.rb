@@ -8,65 +8,81 @@
 
 #By default SQL String limit 255 character
 #Ex:- :limit => 40
+puts ' '
+puts 'Destroying all pevious Seeds'
+puts ' '
+sleep(1)
+Bug.destroy_all
+Comment.destroy_all
+Team.destroy_all
+User.destroy_all
+Project.destroy_all
+puts 'All records destroyed'
 
-# Bugs.destroy_all
-# Comments.destroy_all
-# Teams.destroy_all
-# Users.destroy_all
-# Projects.destroy_all
-# puts 'All records destroyed'
-
+puts ' '
 puts '🌰 🌰 🌰 Seeding Database 🌱 🌱 🌱'
+sleep(1)
+puts ' '
 
 puts 'Creating and Seeding Projects'
 10.times do
 	project =
-		Project.create(
+		Project.create!(
 			project_name: Faker::Company.name,
 			start_date:
 				Faker::Date.between(from: Date.today - 1.year, to: Date.today),
 			target_end_date:
 				Faker::Date.between(from: Date.today, to: Date.today + 1.year),
-			created_by: Faker::Number.between(1, 10),
-			bug_id: Faker::Number.between(1, 50),
+			created_by: rand(1...11),
+			bug_id: rand(1...51),
 		)
 end
 puts 'Seeding of Projects Completed'
 
 puts ' '
+sleep(0.25)
 puts '.'
+sleep(0.25)
 puts '..'
+sleep(0.25)
 puts '...'
+sleep(0.25)
 puts ' '
 
 puts 'Creating and Seeding Teams'
+sleep(1)
 4.times do
 	team =
-		Team.create(
-			team_name: Faker::Team.name.creature,
-			lead_id: Faker::Number.between(1, 10),
-			project_id: Project.all.sample,
-			created_by: Faker::Number.between(1, 10),
+		Team.create!(
+			team_name: Faker::Team.creature,
+			lead_id: rand(1...11),
+			project_id: rand(1...11),
+			created_by: rand(1...11),
 		)
 end
 puts 'Seeding of Teams Completed'
 
 puts ' '
+sleep(0.25)
 puts '.'
+sleep(0.25)
 puts '..'
+sleep(0.25)
 puts '...'
+sleep(0.25)
 puts ' '
 
 puts 'Creating and Seeding Users'
+sleep(1)
 10.times do
 	user =
-		User.create(
+		User.create!(
 			firebase_uid: Faker::Number.number(digits: 12),
 			username: Faker::Internet.user_name,
 			first_name: Faker::Name.first_name,
 			last_name: Faker::Name.last_name,
-			role: Faker::Number.between(1, 3),
-			team_id: Team.all.sample,
+			role: rand(1...4),
+			team_id: rand(1...5),
 			is_team_lead: false,
 			avatar: Faker::Avatar.image,
 			password: '123456',
@@ -85,25 +101,30 @@ end
 puts 'Seeding of Users Completed'
 
 puts ' '
+sleep(0.25)
 puts '.'
+sleep(0.25)
 puts '..'
+sleep(0.25)
 puts '...'
+sleep(0.25)
 puts ' '
 
 puts 'Creating and Seeding Bugs'
+sleep(1)
 50.times do
 	bug =
-		Bug.create(
-			issue_summary: Faker::Book.title,
+		Bug.create!(
+			issue_title: Faker::Book.title,
 			issue_description: Faker::Hacker.say_something_smart,
-			identified_by: User.all.sample,
-			related_project_id: Project.all.sample,
-			assigned_to: User.all.sample,
-			status: Faker::Number.between(1, 13),
-			priority: Faker::Number.between(1, 5),
+			identified_by: rand(1...11),
+			project_id: rand(1...5),
+			assigned_to: rand(1...11),
+			status: rand(1...14),
+			priority: rand(1...6),
 			target_resolution_date:
 				Faker::Date.between(from: Date.today, to: Date.today + 1.year),
-			progress: Faker::Number.between(1, 10),
+			progress: rand(1...11),
 			approved: false,
 			image_url: Faker::Fillmurray.image,
 		)
@@ -111,18 +132,23 @@ end
 puts 'Seeding of Bugs Completed'
 
 puts ' '
+sleep(0.25)
 puts '.'
+sleep(0.25)
 puts '..'
+sleep(0.25)
 puts '...'
+sleep(0.25)
 puts ' '
 
 puts 'Creating and Seeding Comments'
+sleep(1)
 120.times do
 	comment =
-		Comment.create(
-			comment: Faker::Lorem.sentence,
-			created_by: User.all.sample,
-			bug_id: Bug.all.sample,
+		Comment.create!(
+			comment_text: Faker::Lorem.sentence,
+			created_by: rand(1...11),
+			bug_id: rand(1...51),
 		)
 end
 puts 'Seeding of Comments Completed'
