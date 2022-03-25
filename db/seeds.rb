@@ -21,7 +21,7 @@ puts '🌰 🌰 🌰 Seeding Database 🌱 🌱 🌱'
 puts 'Creating and Seeding Projects'
 10.times do
 	project =
-		Projects.create(
+		Project.create(
 			project_name: Faker::Company.name,
 			start_date:
 				Faker::Date.between(from: Date.today - 1.year, to: Date.today),
@@ -42,7 +42,7 @@ puts ' '
 puts 'Creating and Seeding Teams'
 4.times do
 	team =
-		Teams.create(
+		Team.create(
 			team_name: Faker::Team.name.creature,
 			lead_id: Faker::Number.between(1, 10),
 			project_id: Project.all.sample,
@@ -60,7 +60,7 @@ puts ' '
 puts 'Creating and Seeding Users'
 10.times do
 	user =
-		Users.create(
+		User.create(
 			firebase_uid: Faker::Number.number(digits: 12),
 			username: Faker::Internet.user_name,
 			first_name: Faker::Name.first_name,
@@ -93,7 +93,7 @@ puts ' '
 puts 'Creating and Seeding Bugs'
 50.times do
 	bug =
-		Bugs.create(
+		Bug.create(
 			issue_summary: Faker::Book.title,
 			issue_description: Faker::Hacker.say_something_smart,
 			identified_by: User.all.sample,
@@ -119,7 +119,7 @@ puts ' '
 puts 'Creating and Seeding Comments'
 120.times do
 	comment =
-		Comments.create(
+		Comment.create(
 			comment: Faker::Lorem.sentence,
 			created_by: User.all.sample,
 			bug_id: Bug.all.sample,
