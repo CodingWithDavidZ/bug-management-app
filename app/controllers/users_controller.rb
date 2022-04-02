@@ -1,70 +1,55 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+	before_action :authorize, except: %i[create update]
 
-  # GET /users or /users.json
-  def index
-    @users = User.all
-  end
+	# GET /users
+	def index
+		@users = User.all
 
-  # GET /users/1 or /users/1.json
-  def show
-  end
+		render json: @users
+	end
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
+	# GET /users/1
+	def show
+		render json: @current_user
+	end
 
-  # GET /users/1/edit
-  def edit
-  end
+	# POST /users
+	def create
+		user = User.create!(user_params)
+		session[:user_id] = user.id
+		render json: user, status: :created
+	end
 
-  # POST /users or /users.json
-  def create
-    @user = User.new(user_params)
+	# PATCH/PUT /users/1
+	def update
+		user = User.find(params[:id])
+		user.update!(password: params[:password])
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+		render json: user, status: :ok
+	end
 
-  # PATCH/PUT /users/1 or /users/1.json
-  def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+	private
 
-  # DELETE /users/1 or /users/1.json
-  def destroy
-    @user.destroy
+	# Use callbacks to share common setup or constraints between actions.
+	def set_user
+		@user = User.find(params[:id])
+	end
 
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:firebase_uid, :username, :first_name, :last_name, :role, :team_id, :is_team_lead, :avatar, :password_digest, :firebase_access_token, :firebase_phone_number, :firebase_email, :firebase_email, :firebase_email_verified, :firebase_provider_id, :firebase_display_name, :firebase_is_anonymous, :firebase_metadata_creationTime, :firebase_metadata_lastSignInTime, :firebase_client_version, :firebase_photo, :firebase_tenant_id)
-    end
+	# Only allow a list of trusted parameters through.
+	def user_params
+		params
+			.require(:user)
+			.permit(
+				:id,
+				:username,
+				:first_name,
+				:last_name,
+				:role,
+				:team_id,
+				:is_team_lead,
+				:avatar,
+				:password,
+				:email,
+			)
+	end
 end

@@ -8,15 +8,9 @@ class ApplicationController < ActionController::Base
 	private
 
 	def authorize
-		if FirebaseIdToken::Certificates.present? == true
-			validate_user =
-				FirebaseIdToken::Signature.verify(params[:firebase_access_token])
-			return validate_user
-		elsif FirebaseIdToken::Certificates.present? == false
-			FirebaseIdToken::Certificates.request!
-			validate_user =
-				FirebaseIdToken::Signature.verify(params[:firebase_access_token])
-			return validate_user
+		@current_user = User.find_by(id: session[:user_id])
+		unless @current_user
+			render json: { errors: ['Not Authorized'] }, status: :unauthorized
 		end
 	end
 
@@ -25,9 +19,5 @@ class ApplicationController < ActionController::Base
 				errors: exceptions.record.errors.full_messages,
 		       },
 		       status: :unprocessable_entity
-	end
-
-	def auth_params
-		params.permit(:firebase_access_token)
 	end
 end

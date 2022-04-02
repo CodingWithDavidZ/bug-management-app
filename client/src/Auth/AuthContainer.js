@@ -1,6 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { auth } from '../firebase-config';
-import { onAuthStateChanged } from 'firebase/auth';
 import Login from './Login';
 import Register from './Register';
 import { UserContext } from '../Context/UserContext';
@@ -11,7 +9,7 @@ function AuthContainer() {
 	const [registerPassword, setRegisterPassword] = useState('');
 	const [loginEmail, setLoginEmail] = useState('');
 	const [loginPassword, setLoginPassword] = useState('');
-	const [additionalUserInfo, setAdditionalUserInfo] = useState({
+	const [userInfo, setUserInfo] = useState({
 		username: '',
 		first_name: '',
 		last_name: '',
@@ -28,52 +26,9 @@ function AuthContainer() {
 		setAuthType('login');
 	}
 
-	// onAuthStateChanged(auth, (currentUser) => {
-	// 	//TODO: Check to see if this is really needed or not
-	// 	setUser(currentUser);
-	// });
-
 	// TODO: Handle login errors on browser
 
-	function sendUserToBackend(user, type) {
-		fetch(`http://localhost:3000/${type}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				firebase_access_token: user.accessToken,
-				//TODO implement following fields
-				username: additionalUserInfo.username,
-				first_name: additionalUserInfo.first_name,
-				last_name: additionalUserInfo.last_name,
-				// role: role,
-				// team_id: teamId,
-				is_team_lead: false,
-				avatar: additionalUserInfo.avatar,
-				firebase_phone_number: user.phoneNumber,
-				firebase_email: user.email,
-				firebase_email_verified: user.emailVerified,
-				firebase_provider_id: user.providerId,
-				firebase_display_name: user.displayName,
-				firebase_is_anonymous: user.isAnonymous,
-				firebase_metadata_creationTime: user.metadata.creationTime,
-				firebase_metadata_lastSignInTime: user.metadata.lastSignInTime,
-				firebase_client_version: user.clientVersion,
-				firebase_photo: user.photoURL,
-				firebase_tenant_id: user.tenantId,
-				firebase_uid: user.uid,
-			}),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log('AuthContainer > sendUserToBackend > data', data);
-				setUser(data);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}
+	
 
 	function renderAuthMethod(authMethod) {
 		switch (authMethod) {
@@ -81,7 +36,6 @@ function AuthContainer() {
 				return (
 					<Login
 						setUser={setUser}
-						sendUserToBackend={sendUserToBackend}
 						loginEmail={loginEmail}
 						loginPassword={loginPassword}
 						setLoginEmail={setLoginEmail}
@@ -92,20 +46,18 @@ function AuthContainer() {
 				return (
 					<Register
 						setUser={setUser}
-						sendUserToBackend={sendUserToBackend}
 						registerEmail={registerEmail}
 						registerPassword={registerPassword}
 						setRegisterEmail={setRegisterEmail}
 						setRegisterPassword={setRegisterPassword}
-						additionalUserInfo={additionalUserInfo}
-						setAdditionalUserInfo={setAdditionalUserInfo}
+						userInfo={userInfo}
+						setUserInfo={setUserInfo}
 					/>
 				);
 			default:
 				return (
 					<Login
 						setUser={setUser}
-						sendUserToBackend={sendUserToBackend}
 						loginEmail={loginEmail}
 						loginPassword={loginPassword}
 						setLoginEmail={setLoginEmail}

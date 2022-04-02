@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_25_201619) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_30_214821) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,12 +56,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_201619) do
     t.integer "bug_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "team_id"
   end
 
   create_table "teams", force: :cascade do |t|
     t.string "team_name"
     t.integer "lead_id"
-    t.integer "project_id"
     t.integer "created_by"
     t.integer "modified_by"
     t.datetime "created_at", null: false
@@ -69,29 +69,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_201619) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "firebase_uid"
     t.string "username"
     t.string "first_name"
     t.string "last_name"
     t.integer "role"
     t.integer "team_id"
-    t.integer "is_team_lead", default: 0
+    t.integer "is_team_lead"
     t.string "avatar"
     t.string "password_digest"
-    t.string "firebase_access_token"
-    t.string "firebase_phone_number"
-    t.string "firebase_email"
-    t.boolean "firebase_email_verified"
-    t.string "firebase_provider_id"
-    t.string "firebase_display_name"
-    t.boolean "firebase_is_anonymous"
-    t.string "firebase_metadata_creationTime"
-    t.string "firebase_metadata_lastSignInTime"
-    t.string "firebase_client_version"
-    t.string "firebase_photo"
-    t.string "firebase_tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
   end
 
 end

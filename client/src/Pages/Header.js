@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { auth } from '../firebase-config';
+
 import { signOut } from 'firebase/auth';
 import { UserContext } from '../Context/UserContext';
 
@@ -7,7 +7,6 @@ function Header() {
 	const [user, setUser] = useContext(UserContext);
 
 	const logout = async () => {
-		await signOut(auth);
 		logoutOfServer();
 		setUser({});
 	};

@@ -1,4 +1,4 @@
 class Team < ApplicationRecord
-	belongs_to :project, optional: true
+	has_many :projects
 	has_many :users
 end

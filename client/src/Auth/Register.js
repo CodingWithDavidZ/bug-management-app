@@ -1,51 +1,42 @@
 import React, { useContext } from 'react';
-import { auth } from '../firebase-config';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { UserContext } from '../Context/UserContext';
 
-function Register({
-	registerEmail,
-	setRegisterEmail,
-	registerPassword,
-	setRegisterPassword,
-	sendUserToBackend,
-	additionalUserInfo,
-	setAdditionalUserInfo,
-}) {
+function Register({ userInfo, setUserInfo }) {
 	const [user, setUser] = useContext(UserContext);
 
 	function register() {
-		getAuth();
-		createUserWithEmailAndPassword(
-			auth,
-			registerEmail,
-			registerPassword,
-			setAdditionalUserInfo
-		)
-			.then((userCredential) => {
-				// Signed in
-				let user = userCredential.user;
-				setUser(user);
-				sendUserToBackend(user, 'register');
-				// ...
+		fetch(`http://localhost:3000/register`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				username: userInfo.username,
+				first_name: userInfo.first_name,
+				last_name: userInfo.last_name,
+				email: userInfo.email,
+				is_team_lead: false,
+				avatar: userInfo.avatar,
+				password: userInfo.password,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('AuthContainer > register > data', data);
+				setUser(data);
 			})
 			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(
-					'loginErrorCode:',
-					errorCode,
-					'loginErrorMessage:',
-					errorMessage
-				);
-				// ..
+				console.error(error);
 			});
 	}
 
 	return (
 		<div className='w-full max-w-xs'>
 			<h3>Register User:</h3>
-			<div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+			<form
+				className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+				onSubmit={register}
+			>
 				<label className='block text-gray-700 text-sm font-bold mb-2'>
 					Username
 				</label>
@@ -53,10 +44,10 @@ function Register({
 					className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					placeholder='Username'
 					required={true}
-					value={additionalUserInfo.username}
+					value={userInfo.username}
 					onChange={(e) => {
-						setAdditionalUserInfo({
-							...additionalUserInfo,
+						setUserInfo({
+							...userInfo,
 							username: e.target.value,
 						});
 					}}
@@ -68,11 +59,11 @@ function Register({
 				<input
 					className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					placeholder='First Name'
-					value={additionalUserInfo.first_name}
+					value={userInfo.first_name}
 					required={true}
 					onChange={(e) => {
-						setAdditionalUserInfo({
-							...additionalUserInfo,
+						setUserInfo({
+							...userInfo,
 							first_name: e.target.value,
 						});
 					}}
@@ -84,11 +75,11 @@ function Register({
 				<input
 					className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					placeholder='Last Name'
-					value={additionalUserInfo.last_name}
+					value={userInfo.last_name}
 					required={true}
 					onChange={(e) => {
-						setAdditionalUserInfo({
-							...additionalUserInfo,
+						setUserInfo({
+							...userInfo,
 							last_name: e.target.value,
 						});
 					}}
@@ -100,10 +91,13 @@ function Register({
 				<input
 					className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					placeholder='Email'
-					value={registerEmail}
+					value={userInfo.email}
 					required={true}
 					onChange={(e) => {
-						setRegisterEmail(e.target.value);
+						setUserInfo({
+							...userInfo,
+							email: e.target.value,
+						});
 					}}
 				/>
 
@@ -113,10 +107,13 @@ function Register({
 				<input
 					className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					placeholder='Password'
-					value={registerPassword}
+					value={userInfo.password}
 					required={true}
 					onChange={(e) => {
-						setRegisterPassword(e.target.value);
+						setUserInfo({
+							...userInfo,
+							password: e.target.value,
+						});
 					}}
 				/>
 
@@ -126,10 +123,10 @@ function Register({
 				<input
 					className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					placeholder='Image URL'
-					value={additionalUserInfo.avatar}
+					value={userInfo.avatar}
 					onChange={(e) => {
-						setAdditionalUserInfo({
-							...additionalUserInfo,
+						setUserInfo({
+							...userInfo,
 							avatar: e.target.value,
 						});
 					}}
@@ -141,7 +138,7 @@ function Register({
 				>
 					Create User
 				</button>
-			</div>
+			</form>
 		</div>
 	);
 }

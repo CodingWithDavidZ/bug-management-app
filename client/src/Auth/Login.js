@@ -1,55 +1,57 @@
-import React, { useContext } from 'react';
-import { auth } from '../firebase-config';
-import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../Context/UserContext';
 
-function Login({
-	sendUserToBackend,
-	loginEmail,
-	loginPassword,
-	setLoginEmail,
-	setLoginPassword,
-}) {
+function Login({ sendUserToBackend }) {
 	const [user, setUser] = useContext(UserContext);
+	const [userLogin, setUserLogin] = useState({
+		username: '',
+		password: '',
+	});
 
-	const login = () => {
-		getAuth();
-		signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-			.then((userCredential) => {
-				// Signed in
-				let user = userCredential.user;
-				setUser(user);
-				sendUserToBackend(user, 'login');
-				// ...
-			})
-			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(
-					'loginErrorCode:',
-					errorCode,
-					'loginErrorMessage:',
-					errorMessage
-				);
+	async function login(e) {
+		e.preventDefault();
+		const res = await fetch('http://localhost:3000/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				username: userLogin.username,
+				password: userLogin.password,
+			}),
+		});
+		if (res.status === 200) {
+			const user = await res.json();
+			setUser(user);
+			console.log('Login > user', user);
+		} else {
+			setUserLogin({
+				username: '',
+				password: '',
 			});
-	};
+		}
+	}
 
 	return (
 		<div className='w-full max-w-xs' onSubmit={login}>
 			<h3>Login User:</h3>
-			<div
+			<form
 				className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
 				onSubmit={login}
 			>
 				<label className='block text-gray-700 text-sm font-bold mb-2'>
-					Email
+					Username
 				</label>
 				<input
 					className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					required={true}
-					placeholder='Email'
+					placeholder='username'
+					value={userLogin.username}
 					onChange={(e) => {
-						setLoginEmail(e.target.value);
+						setUserLogin({
+							...userLogin,
+							username: e.target.value,
+						});
 					}}
 				/>
 
@@ -60,8 +62,12 @@ function Login({
 					className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					required={true}
 					placeholder='Password'
+					value={userLogin.password}
 					onChange={(e) => {
-						setLoginPassword(e.target.value);
+						setUserLogin({
+							...userLogin,
+							password: e.target.value,
+						});
 					}}
 				/>
 
@@ -71,7 +77,7 @@ function Login({
 				>
 					Login User
 				</button>
-			</div>
+			</form>
 		</div>
 	);
 }
